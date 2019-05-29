@@ -51,6 +51,7 @@ def restaurant_search(city_id, cuisine_id, path):
 
     with open(path, 'w') as f:
 
+
         for i in range(len(data['restaurants'])):
             f.write(f"Name: {data['restaurants'][i]['restaurant']['name']}\n")
             f.write(f"Address: {data['restaurants'][i]['restaurant']['location']['address']}\n")
