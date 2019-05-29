@@ -3,7 +3,7 @@ import requests
 
 headers = {
         "Accept": "application/json",
-        "user-key": "43a81700d6c6dbcd2f03aeabddd8bad7"
+        "user-key": "mykey"
     }
 
 
