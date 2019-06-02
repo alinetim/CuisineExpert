@@ -1,6 +1,4 @@
 import requests
-
-
 headers = {
         "Accept": "application/json",
         "user-key": "mykey"
@@ -48,14 +46,4 @@ def restaurant_search(city_id, cuisine_id, path):
         requests.get\
             (f'https://developers.zomato.com/api/v2.1/search', headers=headers, params=p)
     data = response.json()
-
-    with open(path, 'w') as f:
-
-
-        for i in range(len(data['restaurants'])):
-            f.write(f"Name: {data['restaurants'][i]['restaurant']['name']}\n")
-            f.write(f"Address: {data['restaurants'][i]['restaurant']['location']['address']}\n")
-            f.write(f"Average cost for two: {data['restaurants'][i]['restaurant']['currency']}"
-                    f"{data['restaurants'][i]['restaurant']['average_cost_for_two']}\n")
-            f.write(f"Rating: {data['restaurants'][i]['restaurant']['user_rating']['aggregate_rating']}\n")
-            f.write("-----------------------------------------------------------------------\n")
+    return data
