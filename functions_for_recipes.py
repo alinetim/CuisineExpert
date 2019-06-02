@@ -22,14 +22,19 @@ def get_a_recipe(name_of_recipe):
     response = requests.get(f'https://www.themealdb.com/api/json/v1/1/search.php?s={name_of_recipe}')
     if response.status_code == 200:
         data = response.json()
-        print(data['meals'][INSTRUCTIONS]['strInstructions'])
         i = 1
         n = 21
+        ingredients = []
         while i < n:
-            if type(data['meals'][INSTRUCTIONS][f'strIngredient{i}']) == str and \
-                    type(data['meals'][INSTRUCTIONS][f'strMeasure{i}']) == str:
-                print(data['meals'][INSTRUCTIONS][f'strIngredient{i}'], end='......')
-                print(data['meals'][INSTRUCTIONS][f'strMeasure{i}'])
+            if (data['meals'][INSTRUCTIONS][f'strIngredient{i}'] == "") or \
+                    (data['meals'][INSTRUCTIONS][f'strIngredient{i}'] is None) and \
+                    (data['meals'][INSTRUCTIONS][f'strMeasure{i}'] == "") or \
+                    (data['meals'][INSTRUCTIONS][f'strMeasure{i}'] is None):
                 i += 1
             else:
+                print(data['meals'][INSTRUCTIONS][f'strIngredient{i}'], end='......')
+                print(data['meals'][INSTRUCTIONS][f'strMeasure{i}'])
+                ingredients.append(data['meals'][INSTRUCTIONS][f'strIngredient{i}'])
                 i += 1
+        print(data['meals'][INSTRUCTIONS]['strInstructions'])
+        return ingredients
