@@ -1,4 +1,4 @@
-import requests
+import requests, urllib.parse
 
 
 def food_text_analysis():
