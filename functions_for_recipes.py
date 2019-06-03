@@ -1,4 +1,4 @@
-import requests
+import urllib.parse, requests
 INSTRUCTIONS = 0
 
 
@@ -33,3 +33,15 @@ def get_a_recipe(name_of_recipe):
                 i += 1
             else:
                 i += 1
+
+
+def food_text_analysis(recipe):
+
+    app_id = 'b25a621b'
+    app_key = '164b53282bbeda25555bac62065493ad'
+    urllib.parse.quote(recipe)
+
+    response = requests.get(f"https://api.edamam.com/api/nutrition-data?app_id={app_id}&app_key={app_key}&ingr={recipe}")
+    if response.status_code == 200:
+        data = response.json()
+        return data["calories"], data['totalNutrients']
