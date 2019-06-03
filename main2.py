@@ -8,7 +8,19 @@ while True:
         get_recipes_by_area(country)
         recipe = input('Choose recipe:')
         ingredients = get_a_recipe(recipe)
-        string_ingr = ' '.join(ingredients)
-        print(string_ingr)
-        food_text_analysis('500g Beef Fillet,')
-
+        total_calories = 0
+        total_fat = 0
+        total_carbs = 0
+        total_sugar = 0
+        tota_protein = 0
+        i = 0
+        while i < (len(ingredients) - 1):
+            data = food_text_analysis(ingredients[i] + ' ' + ingredients[i + 1])
+            total_calories += data['calories']
+            total_fat += data['totalNutrients']['FAT']['quantity']
+            total_carbs += data['totalNutrients']['CHOCDF']['quantity']
+            total_sugar += data['totalNutrients']['SUGAR']['quantity']
+            tota_protein += data['totalNutrients']['PROCNT']['quantity']
+            i += 2 
+        print(total_calories)
+        #food_text_analysis(string_ingr)

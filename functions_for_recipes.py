@@ -53,4 +53,4 @@ def food_text_analysis(recipe):
     response = requests.get(f"https://api.edamam.com/api/nutrition-data?app_id={app_id}&app_key={app_key}&ingr={recipe}")
     if response.status_code == 200:
         data = response.json()
-        print(data)
+        return data
