@@ -35,7 +35,7 @@ def get_a_recipe(name_of_recipe):
                 print(data['meals'][INSTRUCTIONS][f'strIngredient{i}'], end='......')
                 print(data['meals'][INSTRUCTIONS][f'strMeasure{i}'])
                 ingredients.append(data['meals'][INSTRUCTIONS][f'strMeasure{i}'])
-                ingredients.append(data['meals'][INSTRUCTIONS][f'strIngredient{i}'])
+                ingredients.append(data['meals'][INSTRUCTIONS][f'strIngredient{i}'] + ',')
                 i += 1
         instruction = data['meals'][INSTRUCTIONS]['strInstructions']
         instruction = instruction.split('.')

@@ -10,5 +10,5 @@ while True:
         ingredients = get_a_recipe(recipe)
         string_ingr = ' '.join(ingredients)
         print(string_ingr)
-        food_text_analysis(string_ingr)
+        food_text_analysis('500g Beef Fillet,')
 
