@@ -16,11 +16,20 @@ while True:
         i = 0
         while i < (len(ingredients) - 1):
             data = food_text_analysis(ingredients[i] + ' ' + ingredients[i + 1])
-            total_calories += data['calories']
-            total_fat += data['totalNutrients']['FAT']['quantity']
-            total_carbs += data['totalNutrients']['CHOCDF']['quantity']
-            total_sugar += data['totalNutrients']['SUGAR']['quantity']
-            tota_protein += data['totalNutrients']['PROCNT']['quantity']
+            try:
+                total_calories += data['calories']
+            except: KeyError
+            try:
+                total_fat += data['totalNutrients']['FAT']['quantity']
+            except: KeyError
+            try:
+                 total_carbs += data['totalNutrients']['CHOCDF']['quantity']
+            except: KeyError
+            try:
+                  total_sugar += data['totalNutrients']['SUGAR']['quantity']
+            except: KeyError
+            try:
+                tota_protein += data['totalNutrients']['PROCNT']['quantity']
+            except: KeyError
             i += 2 
         print(total_calories)
-        #food_text_analysis(string_ingr)
