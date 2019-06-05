@@ -6,8 +6,11 @@ def get_recipes_by_area(country):
     response = requests.get(f"https://www.themealdb.com/api/json/v1/1/filter.php?a={country}")
     if response.status_code == 200:
         data = response.json()
+        recipes = []
         for i in range(len(data["meals"])):
             print(data["meals"][i]["strMeal"])
+            recipes.append(data["meals"][i]["strMeal"])
+
 
 
 def get_all_possible_countries():

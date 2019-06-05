@@ -18,18 +18,23 @@ while True:
             data = food_text_analysis(ingredients[i] + ' ' + ingredients[i + 1])
             try:
                 total_calories += data['calories']
-            except: KeyError
+            except KeyError:
+                pass
             try:
                 total_fat += data['totalNutrients']['FAT']['quantity']
-            except: KeyError
+            except KeyError:
+                pass
             try:
                  total_carbs += data['totalNutrients']['CHOCDF']['quantity']
-            except: KeyError
+            except KeyError:
+                pass
             try:
                   total_sugar += data['totalNutrients']['SUGAR']['quantity']
-            except: KeyError
+            except KeyError:
+                pass
             try:
                 tota_protein += data['totalNutrients']['PROCNT']['quantity']
-            except: KeyError
-            i += 2 
+            except KeyError:
+                pass
+            i += 2
         print(total_calories)
