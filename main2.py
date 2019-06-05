@@ -8,8 +8,11 @@ while True:
     elif answer == 'recipe':
         get_all_possible_countries()
         country = input('Enter preferable country:')
-        get_recipes_by_area(country)
+        recipes = get_recipes_by_area(country)
         recipe = input('Choose recipe:')
+        if recipe not in recipes:
+            print(f"{recipe} can't be found. Please try again!")
+            break
         ingredients = get_a_recipe(recipe)
         total_calories = 0
         total_fat = 0

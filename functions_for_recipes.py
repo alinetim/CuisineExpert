@@ -8,9 +8,9 @@ def get_recipes_by_area(country):
         data = response.json()
         recipes = []
         for i in range(len(data["meals"])):
-            print(data["meals"][i]["strMeal"])
             recipes.append(data["meals"][i]["strMeal"])
-
+            print(data["meals"][i]["strMeal"])
+            return recipes
 
 
 def get_all_possible_countries():
