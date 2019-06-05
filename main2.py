@@ -15,7 +15,7 @@ while True:
                 break
             else:
                 print(f"{recipe} can't be found. Please try again!")
-        ingredients = get_a_recipe(recipe)
+        ingredients, instructions = get_a_recipe(recipe)
         total_calories = 0
         total_fat = 0
         total_carbs = 0
@@ -45,7 +45,10 @@ while True:
             except KeyError:
                 pass
             i += 2
-        print(total_calories)
+        with open(f'{recipe}.txt', 'w') as f:
+            for line in instructions:
+                f.write(line)
+            f.write(f'Totalcal: {total_calories}')
     elif answer == 'restaurant':
         city = input('Enter a city: ')
         while True:
