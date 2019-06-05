@@ -33,7 +33,7 @@ def find_cuisine(cuisine, city_id):
             return data['cuisines'][i]['cuisine']['cuisine_id']
 
 
-def restaurant_search(city_id, cuisine_id, path):
+def restaurant_search(city_id, cuisine_id):
 
     p = {
         "entity_id": f"{city_id}",

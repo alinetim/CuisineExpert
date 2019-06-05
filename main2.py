@@ -9,10 +9,12 @@ while True:
         get_all_possible_countries()
         country = input('Enter preferable country:')
         recipes = get_recipes_by_area(country)
-        recipe = input('Choose recipe:')
-        if recipe not in recipes:
-            print(f"{recipe} can't be found. Please try again!")
-            break
+        while True:
+            recipe = input('Choose recipe:')
+            if recipe in recipes:
+                break
+            else:
+                print(f"{recipe} can't be found. Please try again!")
         ingredients = get_a_recipe(recipe)
         total_calories = 0
         total_fat = 0
@@ -54,9 +56,9 @@ while True:
                 break
             else:
                 cuisine_id_num = find_cuisine(cuisine, city_id)
-                restaurants = restaurant_search(city_id, cuisine_id_num, f'restaurants_{cuisine}.txt')
+                restaurants = restaurant_search(city_id, cuisine_id_num)
 
-                with open(path, 'w') as f:
+                with open(f'{cuisine}_restaurants.txt', 'w') as f:
                     for i in range(len(restaurants['restaurants'])):
                         f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"
                         f"Address: {restaurants['restaurants'][i]['restaurant']['location']['address']}\n"
