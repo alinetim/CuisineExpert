@@ -45,7 +45,7 @@ while True:
             except KeyError:
                 pass
             i += 2
-        with open(f'{recipe}.txt', 'w') as f:
+        with open(f'{recipe}.txt', 'w', encoding = 'UTF-8') as f:
             for line in instructions:
                 f.write(line)
             f.write(f'Totalcal: {total_calories}')
