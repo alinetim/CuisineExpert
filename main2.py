@@ -50,11 +50,11 @@ while True:
                 f.write(line)
             f.write(f'Totalcal: {total_calories}')
     elif answer == 'restaurant':
-        city = input('Enter a city: ')
+        city = input('Enter a city in USA: ')
         while True:
 
             city_id = get_id(city)
-            cuisine = input('Enter a cuisine: ')
+            cuisine = input('Which cuisine you would like to try?: ')
             if not cuisine:
                 break
             else:
@@ -65,7 +65,7 @@ while True:
                     for i in range(len(restaurants['restaurants'])):
                         f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"
                         f"Address: {restaurants['restaurants'][i]['restaurant']['location']['address']}\n"
-                        f"Average cost for two: {restaurants['restaurants'][i]['restaurant']['currency']}\n"
+                        f"Average cost for two: {restaurants['restaurants'][i]['restaurant']['currency']}"
                         f"{restaurants['restaurants'][i]['restaurant']['average_cost_for_two']}\n"
                         f"Rating: {restaurants['restaurants'][i]['restaurant']['user_rating']['aggregate_rating']}\n"
                         f"-----------------------------------------------------------------------\n")

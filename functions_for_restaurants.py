@@ -1,7 +1,8 @@
 import requests
+
 headers = {
         "Accept": "application/json",
-        "user-key": "mykey"
+        "user-key": "43a81700d6c6dbcd2f03aeabddd8bad7"
     }
 
 
@@ -12,11 +13,16 @@ def get_id(city):
     }
 
     response = requests.get(f'https://developers.zomato.com/api/v2.1/cities', headers=headers, params=p)
-    data = response.json()
 
-    for i in range(len(data['location_suggestions'])):
-        if data['location_suggestions'][i]['country_id'] == 216:
-            return data['location_suggestions'][i]['id']
+    if response.status_code == 200:
+
+        data = response.json()
+
+        for i in range(len(data['location_suggestions'])):
+            if data['location_suggestions'][i]['country_id'] == 216:
+                return data['location_suggestions'][i]['id']
+    else:
+        print(f'Sorry, something went wrong! Error {response.status_code}')
 
 
 def find_cuisine(cuisine, city_id):
@@ -26,11 +32,16 @@ def find_cuisine(cuisine, city_id):
     }
 
     response = requests.get(f'https://developers.zomato.com/api/v2.1/cuisines', headers=headers, params=p)
-    data = response.json()
 
-    for i in range(len(data['cuisines'])):
-        if data['cuisines'][i]['cuisine']['cuisine_name'] == cuisine:
-            return data['cuisines'][i]['cuisine']['cuisine_id']
+    if response.status_code == 200:
+
+        data = response.json()
+
+        for i in range(len(data['cuisines'])):
+            if data['cuisines'][i]['cuisine']['cuisine_name'] == cuisine:
+                return data['cuisines'][i]['cuisine']['cuisine_id']
+    else:
+        print(f'Sorry, something went wrong! Error {response.status_code}')
 
 
 def restaurant_search(city_id, cuisine_id):
@@ -39,11 +50,18 @@ def restaurant_search(city_id, cuisine_id):
         "entity_id": f"{city_id}",
         "entity_type": "city",
         "count": 10,
-        "cuisines": f"{cuisine_id}"
+        "cuisines": f"{cuisine_id}",
+        "sort": "rating"
     }
 
     response = \
         requests.get\
             (f'https://developers.zomato.com/api/v2.1/search', headers=headers, params=p)
-    data = response.json()
-    return data
+
+    if response.status_code == 200:
+
+        data = response.json()
+        return data
+
+    else:
+        print(f'Sorry, something went wrong! Error {response.status_code}')
