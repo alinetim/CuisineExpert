@@ -43,7 +43,7 @@ def get_a_recipe(name_of_recipe):
         instruction = data['meals'][INSTRUCTIONS]['strInstructions']
         instruction = instruction.split('.')
         for sentence in instruction:
-            main_info.append(sentence.strip() + '.')
+            main_info.append(sentence.replace('\n', '').replace('\r', '').strip(' ') + '.')
         return ingredients, main_info
 
 
