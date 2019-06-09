@@ -62,14 +62,14 @@ while True:
             for line in instructions:
                 if len(line) > 4:
                     f.write(f'{line}\n')
-            f.write(f"Bon appetit!!\n")
-            f.write(f"-----------------------------------------------------------------------\n")
-            f.write(f'Recipe analysis:\n')
-            f.write(f'Total calories: {total_calories} kcal.\n')
-            f.write(f'Total fat: {total_fat:.2f} g.\n')
-            f.write(f'Total carbs: {total_carbs:.2f} g.\n')
-            f.write(f'Total protein: {tota_protein:.2f} g.\n')
-            f.write(f'Total sugar: {total_sugar:.2f} g.')
+            f.write(f"Bon appetit!!\n"
+            f"-----------------------------------------------------------------------\n"
+            f'Recipe analysis:\n'
+            f'Total calories: {total_calories} kcal.\n'
+            f'Total fat: {total_fat:.2f} g.\n'
+            f'Total carbs: {total_carbs:.2f} g.\n'
+            f'Total protein: {tota_protein:.2f} g.\n'
+            f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
         city = input('Enter a city in USA: ')
         city_id = get_id(city)
