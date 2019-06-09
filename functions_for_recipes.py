@@ -36,14 +36,14 @@ def get_a_recipe(name_of_recipe):
                     (data['meals'][INSTRUCTIONS][f'strMeasure{i}'] is None):
                 i += 1
             else:
-                main_info.append((data['meals'][INSTRUCTIONS][f'strIngredient{i}'] + '......' + data['meals'][INSTRUCTIONS][f'strMeasure{i}']) + '\n')
+                main_info.append((data['meals'][INSTRUCTIONS][f'strIngredient{i}'] + '......' + data['meals'][INSTRUCTIONS][f'strMeasure{i}']))
                 ingredients.append(data['meals'][INSTRUCTIONS][f'strMeasure{i}'])
                 ingredients.append(data['meals'][INSTRUCTIONS][f'strIngredient{i}'] + ',')
                 i += 1
         instruction = data['meals'][INSTRUCTIONS]['strInstructions']
         instruction = instruction.split('.')
         for sentence in instruction:
-            main_info.append(sentence + '.')
+            main_info.append(sentence.strip() + '.')
         return ingredients, main_info
 
 

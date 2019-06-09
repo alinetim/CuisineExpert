@@ -2,19 +2,25 @@ from functions_for_recipes import get_a_recipe, get_all_possible_countries, get_
 from functions_for_restaurants import get_id, find_cuisine, restaurant_search
 
 while True:
-    answer = input('Do you want to cook by yourself or go to restaurant?(Choose: recipe/ restaurant):')
+    answer = input('Do you want to cook by yourself or go to restaurant?(Choose: recipe/ restaurant/ "enter" to finish):')
     if not answer:
         break
     elif answer == 'recipe':
         get_all_possible_countries()
-        country = input('Enter preferable country:')
-        recipes = get_recipes_by_area(country)
+        while True:
+            country = input('Enter preferable cuisine:')
+            try:
+                recipes = get_recipes_by_area(country)
+                break
+            except:
+                print('Сuisine not found. Please try again!')
+                continue
         while True:
             recipe = input('Choose recipe:')
             if recipe in recipes:
                 break
             else:
-                print(f"{recipe} can't be found. Please try again!")
+                print("The recipe is not found. Please try again!")
         ingredients, instructions = get_a_recipe(recipe)
         total_calories = 0
         total_fat = 0
@@ -23,6 +29,8 @@ while True:
         tota_protein = 0
         i = 0
         while i < (len(ingredients) - 1):
+            if i == 0:
+                print('Procesing .', end = '', flush = True)
             data = food_text_analysis(ingredients[i] + ' ' + ingredients[i + 1])
             try:
                 total_calories += data['calories']
@@ -45,30 +53,37 @@ while True:
             except KeyError:
                 pass
             i += 2
+            if i < (len(ingredients) - 1):
+                print(' .', end = '', flush = True)
+            else:
+                print(' .', flush = True)
         with open(f'{recipe}.txt', 'w', encoding = 'UTF-8') as f:
+            f.write(f'Recipe:\n')
             for line in instructions:
-                f.write(line)
-            f.write(f'Totalcal: {total_calories}')
+                if len(line) > 4:
+                    f.write(f'{line}\n')
+            f.write(f"Bon appetit!!\n")
+            f.write(f"-----------------------------------------------------------------------\n")
+            f.write(f'Recipe analysis:\n')
+            f.write(f'Total calories: {total_calories} kcal.\n')
+            f.write(f'Total fat: {total_fat:.2f} g.\n')
+            f.write(f'Total carbs: {total_carbs:.2f} g.\n')
+            f.write(f'Total protein: {tota_protein:.2f} g.\n')
+            f.write(f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
         city = input('Enter a city in USA: ')
-        while True:
-
-            city_id = get_id(city)
-            cuisine = input('Which cuisine you would like to try?: ')
-            if not cuisine:
-                break
-            else:
-                cuisine_id_num = find_cuisine(cuisine, city_id)
-                restaurants = restaurant_search(city_id, cuisine_id_num)
-
-                with open(f'{cuisine}_restaurants.txt', 'w') as f:
-                    for i in range(len(restaurants['restaurants'])):
-                        f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"
-                        f"Address: {restaurants['restaurants'][i]['restaurant']['location']['address']}\n"
-                        f"Average cost for two: {restaurants['restaurants'][i]['restaurant']['currency']}"
-                        f"{restaurants['restaurants'][i]['restaurant']['average_cost_for_two']}\n"
-                        f"Rating: {restaurants['restaurants'][i]['restaurant']['user_rating']['aggregate_rating']}\n"
-                        f"-----------------------------------------------------------------------\n")
+        city_id = get_id(city)
+        cuisine = input('Which cuisine you would like to try?: ')
+        cuisine_id_num = find_cuisine(cuisine, city_id)
+        restaurants = restaurant_search(city_id, cuisine_id_num)
+        with open(f'{cuisine}_restaurants.txt', 'w', encoding = 'UTF-8') as f:
+            for i in range(len(restaurants['restaurants'])):
+                f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"
+                f"Address: {restaurants['restaurants'][i]['restaurant']['location']['address']}\n"
+                f"Average cost for two: {restaurants['restaurants'][i]['restaurant']['currency']}"
+                f"{restaurants['restaurants'][i]['restaurant']['average_cost_for_two']}\n"
+                f"Rating: {restaurants['restaurants'][i]['restaurant']['user_rating']['aggregate_rating']}\n"
+                f"-----------------------------------------------------------------------\n")
     else:
-        print('Wrong answer')
+        print('Wrong answer. Please try again!')
         continue
