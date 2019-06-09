@@ -28,9 +28,8 @@ while True:
         total_sugar = 0
         tota_protein = 0
         i = 0
+        print('Procesing .', end = '', flush = True)
         while i < (len(ingredients) - 1):
-            if i == 0:
-                print('Procesing .', end = '', flush = True)
             data = food_text_analysis(ingredients[i] + ' ' + ingredients[i + 1])
             try:
                 total_calories += data['calories']
