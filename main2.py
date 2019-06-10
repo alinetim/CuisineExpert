@@ -2,21 +2,31 @@ from functions_for_recipes import get_a_recipe, get_all_possible_countries, get_
 from functions_for_restaurants import get_id, find_cuisine, restaurant_search
 
 while True:
+    print("-----------------------------------------------------------------------")
     answer = input('Do you want to cook by yourself or go to restaurant?(Choose: recipe/ restaurant/ "enter" to finish):')
+    print("-----------------------------------------------------------------------")
     if not answer:
         break
     elif answer == 'recipe':
-        get_all_possible_countries()
+        countries =  get_all_possible_countries()
+        for country in countries:
+            print(country)
         while True:
+            print("-----------------------------------------------------------------------")
             country = input('Enter preferable cuisine:')
+            print("-----------------------------------------------------------------------")
             try:
                 recipes = get_recipes_by_area(country)
                 break
             except:
                 print('Сuisine not found. Please try again!')
                 continue
+        for recipe in recipes:
+            print(recipe)
         while True:
+            print("-----------------------------------------------------------------------")
             recipe = input('Choose recipe:')
+            print("-----------------------------------------------------------------------")
             if recipe in recipes:
                 break
             else:
