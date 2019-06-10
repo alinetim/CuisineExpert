@@ -63,10 +63,10 @@ while True:
                 pass
             i += 2
             if i < (len(ingredients) - 1):
-                print(' .', end = '', flush = True)
+                print(' .', end='', flush=True)
             else:
-                print(' .', flush = True)
-        with open(f'{recipe}.txt', 'w', encoding = 'UTF-8') as f:
+                print(' .', flush=True)
+        with open(f'{recipe}.txt', 'w', encoding='UTF-8') as f:
             f.write(f'Recipe:\n')
             for line in instructions:
                 if len(line) > 4:
@@ -81,11 +81,22 @@ while True:
             f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
         city = input('Enter a city in USA: ')
-        city_id = get_id(city)
+        try:
+            city_id = get_id(city)
+        except KeyError:
+            pass
+
         cuisine = input('Which cuisine you would like to try?: ')
-        cuisine_id_num = find_cuisine(cuisine, city_id)
-        restaurants = restaurant_search(city_id, cuisine_id_num)
-        with open(f'{cuisine}_restaurants.txt', 'w', encoding = 'UTF-8') as f:
+        cuisine = cuisine.capitalize()
+        try:
+            cuisine_id_num = find_cuisine(cuisine, city_id)
+        except KeyError:
+            pass
+        try:
+            restaurants = restaurant_search(city_id, cuisine_id_num)
+        except KeyError:
+            pass
+        with open(f'{cuisine}_restaurants.txt', 'w', encoding='UTF-8') as f:
             for i in range(len(restaurants['restaurants'])):
                 f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"
                 f"Address: {restaurants['restaurants'][i]['restaurant']['location']['address']}\n"
