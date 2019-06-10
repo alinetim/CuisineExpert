@@ -81,6 +81,7 @@ while True:
             f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
         city = input('Enter a city in USA: ')
+        print("-----------------------------------------------------------------------")
         try:
             city_id = get_id(city)
         except KeyError:
