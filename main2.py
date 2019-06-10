@@ -53,10 +53,10 @@ while True:
                 pass
             i += 2
             if i < (len(ingredients) - 1):
-                print(' .', end = '', flush = True)
+                print(' .', end='', flush=True)
             else:
-                print(' .', flush = True)
-        with open(f'{recipe}.txt', 'w', encoding = 'UTF-8') as f:
+                print(' .', flush=True)
+        with open(f'{recipe}.txt', 'w', encoding='UTF-8') as f:
             f.write(f'Recipe:\n')
             for line in instructions:
                 if len(line) > 4:
