@@ -9,16 +9,17 @@ def get_recipes_by_area(country):
         recipes = []
         for i in range(len(data["meals"])):
             recipes.append(data["meals"][i]["strMeal"])
-            print(data["meals"][i]["strMeal"])
-            return recipes
+        return recipes
 
 
 def get_all_possible_countries():
+    countries = []
     response = requests.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
     if response.status_code == 200:
         data = response.json()
         for i in range(len(data["meals"])):
-            print(data['meals'][i]['strArea'])
+            countries.append(data['meals'][i]['strArea'])
+        return countries
 
 
 def get_a_recipe(name_of_recipe):
