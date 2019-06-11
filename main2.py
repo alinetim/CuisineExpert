@@ -73,6 +73,7 @@ while True:
         city = input('Enter a city in USA: ')
         if not city:
             continue
+            
         try:
             city_id = get_id(city)
         except KeyError:
