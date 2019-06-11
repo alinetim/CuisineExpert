@@ -50,8 +50,8 @@ def get_a_recipe(name_of_recipe):
 
 def food_text_analysis(recipe):
 
-    app_id = 'b25a621b'
-    app_key = '164b53282bbeda25555bac62065493ad'
+    app_id = '23c3cc5b'
+    app_key = '40422d573ba553cda8ae7536b1d6f300'
     urllib.parse.quote(recipe)
 
     response = requests.get(f"https://api.edamam.com/api/nutrition-data?app_id={app_id}&app_key={app_key}&ingr={recipe}")
