@@ -87,8 +87,10 @@ while True:
         except KeyError:
             pass
 
-        cuisine = input('Which cuisine you would like to try?: ')
+        cuisine = input('Which cuisine you would like to try?(f.e. Russian): ')
         cuisine = cuisine.capitalize()
+        if not cuisine:
+            continue
         try:
             cuisine_id_num = find_cuisine(cuisine, city_id)
         except KeyError:
