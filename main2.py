@@ -2,7 +2,7 @@ from functions_for_recipes import get_a_recipe, get_all_possible_countries, get_
 from functions_for_restaurants import get_id, find_cuisine, restaurant_search
 
 while True:
-    print("-----------------------------------------------------------------------")
+    print("=======================================================================")
     answer = input('Do you want to cook by yourself or go to restaurant?(Choose: recipe/ restaurant/ "enter" to finish):')
     print("-----------------------------------------------------------------------")
     if not answer:
@@ -80,25 +80,27 @@ while True:
             f'Total protein: {tota_protein:.2f} g.\n'
             f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
-        city = input('Enter a city in the USA: ')
-        print("-----------------------------------------------------------------------")
-        try:
+        while True:
+            city = input('Enter a city in the USA: ')
+            print("-----------------------------------------------------------------------")
             city_id = get_id(city)
-        except KeyError:
-            pass
-
-        cuisine = input('Which cuisine you would like to try?(f.e. Russian): ')
-        cuisine = cuisine.capitalize()
-        if not cuisine:
-            continue
-        try:
+            if city_id == None:
+                print('The city is not found. Please try again!')
+                print("-----------------------------------------------------------------------")
+                continue
+            else:
+                break
+        while True:
+            cuisine = input('Which cuisine would you like to try?(f.e. Russian): ')
+            cuisine = cuisine.capitalize()
             cuisine_id_num = find_cuisine(cuisine, city_id)
-        except KeyError:
-            pass
-        try:
-            restaurants = restaurant_search(city_id, cuisine_id_num)
-        except KeyError:
-            pass
+            if cuisine_id_num == None:
+                print('The cuisine is not found. Please try again!')
+                print("-----------------------------------------------------------------------")
+                continue
+            else:
+                break
+        restaurants = restaurant_search(city_id, cuisine_id_num)
         with open(f'{cuisine}_restaurants.txt', 'w', encoding='UTF-8') as f:
             for i in range(len(restaurants['restaurants'])):
                 f.write(f"Name: {restaurants['restaurants'][i]['restaurant']['name']}\n"

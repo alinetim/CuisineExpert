@@ -22,7 +22,7 @@ def get_id(city):
             if data['location_suggestions'][i]['country_id'] == 216:
                 return data['location_suggestions'][i]['id']
     else:
-        print(f'Sorry, something went wrong! Error {response.status_code}')
+        return response.status_code 
 
 
 def find_cuisine(cuisine, city_id):
@@ -40,8 +40,6 @@ def find_cuisine(cuisine, city_id):
         for i in range(len(data['cuisines'])):
             if data['cuisines'][i]['cuisine']['cuisine_name'] == cuisine:
                 return data['cuisines'][i]['cuisine']['cuisine_id']
-    else:
-        print(f'Sorry, something went wrong! Error {response.status_code}')
 
 
 def restaurant_search(city_id, cuisine_id):
@@ -62,6 +60,3 @@ def restaurant_search(city_id, cuisine_id):
 
         data = response.json()
         return data
-
-    else:
-        print(f'Sorry, something went wrong! Error {response.status_code}')
