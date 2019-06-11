@@ -80,7 +80,7 @@ while True:
             f'Total protein: {tota_protein:.2f} g.\n'
             f'Total sugar: {total_sugar:.2f} g.')
     elif answer == 'restaurant':
-        city = input('Enter a city in USA: ')
+        city = input('Enter a city in the USA: ')
         print("-----------------------------------------------------------------------")
         try:
             city_id = get_id(city)
