@@ -84,7 +84,7 @@ while True:
             city = input('Enter a city in the USA: ')
             print("-----------------------------------------------------------------------")
             city_id = get_id(city)
-            if city_id == None:
+            if city_id is None:
                 print('The city is not found. Please try again!')
                 print("-----------------------------------------------------------------------")
                 continue
@@ -94,7 +94,7 @@ while True:
             cuisine = input('Which cuisine would you like to try?(f.e. Russian): ')
             cuisine = cuisine.capitalize()
             cuisine_id_num = find_cuisine(cuisine, city_id)
-            if cuisine_id_num == None:
+            if cuisine_id_num is None:
                 print('The cuisine is not found. Please try again!')
                 print("-----------------------------------------------------------------------")
                 continue
